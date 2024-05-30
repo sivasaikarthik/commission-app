@@ -32,6 +32,10 @@ public class OrderService implements OrderServiceInterface {
 
 	@Autowired
 	AffService affService;
+	
+	public List<Order> getAll() {
+		return orderRepository.findAll();
+	}
 
 	@Override
 	public Order createOrder(NewOrderDto orderDto) {
