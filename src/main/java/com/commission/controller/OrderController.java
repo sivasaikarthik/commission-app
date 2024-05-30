@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.commission.dto.NewOrderDto;
+import com.commission.dto.OrderUpdateDto;
 import com.commission.model.Category;
 import com.commission.model.Order;
 import com.commission.model.Phase;
@@ -26,23 +28,15 @@ public class OrderController {
 	OrderService orderService ;
 	
 	@PostMapping("/createOrder")
-	public String processOrder(@RequestBody Order order) {
-		orderService.createOrder(order);
-		return "order" + order.getPhase() + "sucess";
+	public String processOrder(@RequestBody NewOrderDto orderDto) {
+		orderService.createOrder(orderDto);
+		return orderDto.getOrderId() + "sucess";
 	}
 	
 	@PostMapping("/updateOrder")
-	public String processOrder(@RequestBody Dto dto) {
+	public String processOrder(@RequestBody OrderUpdateDto dto) {
 		orderService.updateOrder(dto.getOrderId(), dto.getPhase());
 		return "order" + dto.getOrderId();
 	}
-}
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-class Dto {
-	String orderId;
-	Phase phase;
 }
 

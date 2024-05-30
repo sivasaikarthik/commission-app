@@ -12,13 +12,7 @@ import com.commission.model.Phase;
 
 @SpringBootApplication
 public class Application {
-
-	
-//	OrderController orderController = new OrderController();	
 	public static void main(String[] args) {
-	
 		SpringApplication.run(Application.class, args);
 	}
-
-
 }
