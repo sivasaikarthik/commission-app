@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class NewOrderDto {
+public class OrderDto {
 	private String orderId;
 	private String productId;
 	private String affiliatedId;

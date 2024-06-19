@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.service.annotation.GetExchange;
 
@@ -20,8 +21,8 @@ public class AffiliateController {
 	@Autowired
 	AffService affService;
 	
-	@GetMapping("/getAffilicateById")
-	public Optional<Affiliate> getByID(String affilicateId) {
-		return affService.getAffiById(affilicateId);
+	@GetMapping("/getAffilicateById/{id}")
+	public Affiliate getByID(@PathVariable String id) {
+		return affService.getAffiById(id);
 	}
 }

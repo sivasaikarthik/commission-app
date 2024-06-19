@@ -26,8 +26,9 @@ public class AffService {
 	@Autowired
 	CommisionFacotry commisionFacotry;
 
-	public Optional<Affiliate> getAffiById(String id) {
-		return affirepo.findById(id);
+	public Affiliate getAffiById(String id) {
+		return affirepo.findById(id)
+				.orElseThrow(() -> new RuntimeException("id not found"));
 	}
 
 	@Transactional

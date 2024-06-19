@@ -1,26 +1,16 @@
 package com.commission.service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import org.aspectj.weaver.tools.cache.FlatFileCacheBacking;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.commission.Strategy.FlatStategy;
-import com.commission.Strategy.PercentageStartegy;
-import com.commission.dao.AffiliateRepo;
 import com.commission.dao.OrderRepository;
-import com.commission.dao.TransactionRepository;
-import com.commission.dto.NewOrderDto;
-import com.commission.model.Affiliate;
-import com.commission.model.Category;
+import com.commission.dto.OrderDto;
+import com.commission.exceptions.OrderNotFoundException;
 import com.commission.model.Order;
-import com.commission.model.OrderCommission;
 import com.commission.model.Phase;
-import com.commission.model.Transaction;
 import com.commission.service.abstrac.OrderServiceInterface;
 
 
@@ -38,17 +28,41 @@ public class OrderService implements OrderServiceInterface {
 	}
 
 	@Override
-	public Order createOrder(NewOrderDto orderDto) {
-		return orderRepository.save(new Order(orderDto.getOrderId(),orderDto.getProductId(), orderDto.getAffiliatedId(),orderDto.getPrice(),orderDto.getCategory(),LocalDateTime.now(), Phase.CREATED));
+	public Order createOrder(OrderDto orderDto) {
+	    Order order = new Order(
+	        orderDto.getOrderId(),
+	        orderDto.getProductId(),
+	        orderDto.getAffiliatedId(),
+	        orderDto.getPrice(),
+	        orderDto.getCategory(),
+	        LocalDateTime.now(),
+	        Phase.CREATED
+	    );
+	    return orderRepository.save(order);
 	}
 
+
 	@Override
-	public String updateOrder(String orderid, Phase phase) {
-		Order order = orderRepository.getById(orderid);
+	public String updateOrder(String orderId, Phase phase) throws OrderNotFoundException {
+		Order order = orderRepository.findById(orderId)
+				.orElseThrow(() ->new OrderNotFoundException("No order exists associate to this id" + orderId));
 		affService.phaseExcutorFactory(order, phase);
 		order.setPhase(phase);
 		orderRepository.save(order);
-		return null;
+		return "Order ID " + orderId + " updated successfully to phase " + phase;
+	}
+
+	@Override
+	public OrderDto getOrderById(String id) throws OrderNotFoundException{
+		return orderRepository.findById(id).
+				map(order -> new OrderDto(
+						order.getOrderId(), 
+			            order.getProductId(), 
+			            order.getAffiliatedId(), 
+			            order.getPrice(), 
+			            order.getCategory()
+						))
+				.orElseThrow(() -> new OrderNotFoundException("No order exists associate to this id" + id));
 	}
 
 }
