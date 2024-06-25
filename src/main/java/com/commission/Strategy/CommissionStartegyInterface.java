@@ -1,5 +1,5 @@
 package com.commission.Strategy;
 
-public interface DiscountStartegyInterface {
+public interface CommissionStartegyInterface {
 	public double getCommision(double price);
 }

@@ -3,16 +3,16 @@ package com.commission.Strategy;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PercentageStartegy implements DiscountStartegyInterface {
+public class PercentageCommissionStartegy implements CommissionStartegyInterface {
 
 	private double percentage;
 	private double maxCap;
 
-	public PercentageStartegy() {
+	public PercentageCommissionStartegy() {
 		super();
 	}
 
-	public PercentageStartegy(double percentage, double maxCap) {
+	public PercentageCommissionStartegy(double percentage, double maxCap) {
 		super();
 		this.percentage = percentage;
 		this.maxCap = maxCap;
