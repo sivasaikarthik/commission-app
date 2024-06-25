@@ -33,10 +33,13 @@ To install this application, run the following commands:
 git clone https://github.com/sivasaikarthik/commission-app
 ```
 
+<!--- 
+
 ## Test Application
 
-You can run unit tests in `src/test/java/com/devsuatt/todoApp`
+You can run unit tests in `src/test/java/com/commission`
 
+--->
 ## Run Application with dependencies on Maven
 
 - For maven usage
