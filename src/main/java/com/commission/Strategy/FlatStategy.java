@@ -19,9 +19,7 @@ public class FlatStategy implements DiscountStartegyInterface {
 
 	@Override
 	public double getCommision(double price) {
-		// TODO Auto-generated method stub
-		return price - flat;
-
+		return (price - flat > 0) ? (price - flat) : price;
 	}
 
 }

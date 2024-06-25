@@ -23,8 +23,6 @@ import lombok.ToString;
 @Table(name = "filpkartorder")
 public class Order {
 	@Id
-//	@GeneratedValue(generator = "UUID")
-//	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 	private String orderId;
 	private String productId;
 	private String affiliatedId;

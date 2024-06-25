@@ -20,7 +20,7 @@ public class CommisionFacotry {
 		calculatorMap.put(Category.CLOTHING, new FlatStategy(50));
 		calculatorMap.put(Category.FURNITURE, new PercentageStartegy(6, 100));
 		calculatorMap.put(Category.MOBILECOVERS, new FlatStategy(5));
-		calculatorMap.put(Category.CLOTHING, new PercentageStartegy(15, 1000));
+		calculatorMap.put(Category.MOBILES, new PercentageStartegy(15, 1000));
 	}
 	
 	public DiscountStartegyInterface getCalculator(Category item) {

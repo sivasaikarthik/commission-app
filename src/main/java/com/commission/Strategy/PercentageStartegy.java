@@ -6,22 +6,21 @@ import org.springframework.stereotype.Service;
 public class PercentageStartegy implements DiscountStartegyInterface {
 
 	private double percentage;
-	private double flat;
+	private double maxCap;
 
 	public PercentageStartegy() {
 		super();
 	}
 
-	public PercentageStartegy(double percentage, double flat) {
+	public PercentageStartegy(double percentage, double maxCap) {
 		super();
 		this.percentage = percentage;
-		this.flat = flat;
+		this.maxCap = maxCap;
 	}
 
 	@Override
 	public double getCommision(double price) {
-		// TODO Auto-generated method stub
-		return Math.max(price - flat, price - (price * percentage / 100));
+		return Math.min(this.maxCap, (price * percentage / 100));
 	}
 
 }

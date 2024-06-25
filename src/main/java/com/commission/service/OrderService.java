@@ -21,7 +21,7 @@ public class OrderService implements OrderServiceInterface {
 	OrderRepository orderRepository;
 
 	@Autowired
-	AffService affService;
+	CommissionService affService;
 	
 	public List<Order> getAll() {
 		return orderRepository.findAll();
@@ -38,6 +38,7 @@ public class OrderService implements OrderServiceInterface {
 	        LocalDateTime.now(),
 	        Phase.CREATED
 	    );
+	    affService.phaseExcutor(order);
 	    return orderRepository.save(order);
 	}
 
@@ -45,11 +46,11 @@ public class OrderService implements OrderServiceInterface {
 	@Override
 	public String updateOrder(String orderId, Phase phase) throws OrderNotFoundException {
 		Order order = orderRepository.findById(orderId)
-				.orElseThrow(() ->new OrderNotFoundException("No order exists associate to this id" + orderId));
-		affService.phaseExcutorFactory(order, phase);
+				.orElseThrow(() ->new OrderNotFoundException("No order exists associate to this id " + orderId));
 		order.setPhase(phase);
+		affService.phaseExcutor(order);
 		orderRepository.save(order);
-		return "Order ID " + orderId + " updated successfully to phase " + phase;
+		return orderId + " Order ID updated successfully to phase " + phase;
 	}
 
 	@Override
