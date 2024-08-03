@@ -1,7 +1,7 @@
 
-# Todo app project using Spring Boot in backend
+# Commission app project using Spring Boot in backend
 
-This project provides to CRUD operations for users and users' tasks.
+This project provides to CRUD operations for commission, order and affiliate services
 
 - [x] Java 11
 - [x] Spring Boot
